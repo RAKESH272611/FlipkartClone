@@ -2,6 +2,8 @@ import React,{useEffect} from 'react'
 import Navbar from './Navbar'
 import Banner from './Banner'
 import Slide from './Slide'
+import MidSlide from './MidSlide'
+import MidSection from './MidSection'
 import {styled,Box} from '@mui/material';
 import { getProducts } from '../../redux/actions/productAction';
 import {useDispatch,useSelector} from 'react-redux';
@@ -26,7 +28,8 @@ const Home = () => {
         <Navbar/>
         <Component>
         <Banner/>
-        <Slide products={products} title="Deal of the Day" timer={true}/>
+        <MidSlide products={products} title="Deal of the Day" timer={true}/>
+        <MidSection/>
         <Slide products={products} title="Discounts for You" timer={false}/>
         <Slide products={products} title="Suggested Items" timer={false}/>
         <Slide products={products} title="Top Selections"/>
