@@ -15,11 +15,12 @@ app.use('/',Routes);
 dotenv.config();
 const USERNAME = process.env.DB_USERNAME;
 const PASSWORD = process.env.DB_PASSWORD;
+const PORT = process.env.PORT || 5000;
 
 connection(USERNAME,PASSWORD);
 
 defaultData();
 
-app.listen(5000,()=>{
-    console.log("server is running at port 5000");
+app.listen(PORT,()=>{
+    console.log(`server is running at port ${PORT}`);
 })

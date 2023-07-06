@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from '../constants/productContstant'
 
-const URL = 'http://localhost:5000';
+const URL = 'https://long-pear-bison-tutu.cyclic.app';
 
 export const getProducts = () => async(dispatch) => {
     try{

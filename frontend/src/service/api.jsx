@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:5000';
+const URL = 'https://long-pear-bison-tutu.cyclic.app';
 
 export const authenticateSignup = async(data) => {
     try{
