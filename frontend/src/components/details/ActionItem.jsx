@@ -4,6 +4,9 @@ import {ShoppingCart as Cart,FlashOn as Flash} from '@mui/icons-material'
 import {useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux'
 import {addToCart} from '../../redux/actions/cartAction'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const LeftContainer = styled(Box)(({theme})=>({
   minWidth: "40%",
@@ -40,9 +43,19 @@ const ActionItem = ({product}) => {
   const {id} = product;
 
   const addItemToCart = () => {
+    const token = window.localStorage.getItem('authToken');
+    if(token){
     dispatch(addToCart(id,quantity));
      navigate("/cart");
+    }
+    else{
+      toast.error('Please log in first to add items to your cart.', {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 1000
+      });
+    }
   }
+
 
   return (
     <LeftContainer>
@@ -51,6 +64,7 @@ const ActionItem = ({product}) => {
         </Box>
       <StyledButton variant='contained' onClick={()=>addItemToCart()} style={{marginRight:10,background:"#ff9f00"}}><Cart/>Add to Cart</StyledButton>
       <StyledButton variant='contained' style={{background:"#fb541b"}}><Flash/>Buy Now</StyledButton>
+      <ToastContainer/>
     </LeftContainer>
   )
 }

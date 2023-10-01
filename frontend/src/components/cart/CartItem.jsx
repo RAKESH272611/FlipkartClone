@@ -43,7 +43,7 @@ const CartItem = ({item}) => {
   return (
     <Component>
         <LeftComponent>
-          <img src={item.url} alt="product" style={{height:110,widht:110}}/>
+          <img src={item.url} alt="product" style={{height:110,width:110}}/>
           <GroupedButton/>
         </LeftComponent>
         <Box style={{margin: 20}}>

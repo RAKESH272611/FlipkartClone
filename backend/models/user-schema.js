@@ -33,7 +33,20 @@ const userSchema = new mongoose.Schema({
     phone:{
         type: String,
         required: true
+    },
+    cart: [
+     {
+    id: String,
+    url: String,
+    detailUrl: String,
+    title: Object,
+    price: Object,
+    quantity: Number,
+    description: String,
+    discount: String,
+    tagline: String 
     }
+    ]
 });
 
 const user = mongoose.model('user',userSchema);

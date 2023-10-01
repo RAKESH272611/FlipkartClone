@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import {Box,Typography,Menu,MenuItem,styled} from '@mui/material';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import { useDispatch } from 'react-redux';
+import { removeItemsAfterLogOut } from '../../redux/actions/cartAction';
 
 const Component = styled(Menu)`
    margin-top: 5px;
@@ -12,6 +14,8 @@ const Logout = styled(Typography)`
 `;
 
 const Profile = ({account,setAccount}) => {
+
+   const dispatch = useDispatch();
 
   const [open,setOpen] = useState(false);
 
@@ -25,6 +29,8 @@ const Profile = ({account,setAccount}) => {
 
   const LogoutUser = () => {
      setAccount('');
+     window.localStorage.removeItem('authToken')
+     dispatch(removeItemsAfterLogOut());
   }
 
   return (

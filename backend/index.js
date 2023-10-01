@@ -1,15 +1,20 @@
 import express from 'express';
+import jwt  from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { connection } from './database/db.js';
 import defaultData from './default.js';
 import Routes from './routes/route.js';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import {v4 as uuid} from 'uuid';
+import cookieParser from 'cookie-parser'
+
 
 const app = express();
 app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
+app.use(cookieParser());
 app.use('/',Routes);
 
 dotenv.config();
@@ -20,6 +25,7 @@ const PORT = process.env.PORT || 5000;
 connection(USERNAME,PASSWORD);
 
 defaultData();
+
 
 app.listen(PORT,()=>{
     console.log(`server is running at port ${PORT}`);
