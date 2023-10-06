@@ -6,6 +6,7 @@ import {useDispatch} from 'react-redux'
 import {addToCart} from '../../redux/actions/cartAction'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { paymentOrders, paymentVeriy } from '../../service/api';
 
 
 const LeftContainer = styled(Box)(({theme})=>({
@@ -56,6 +57,37 @@ const ActionItem = ({product}) => {
     }
   }
 
+  const handleOpenRazorPay = async(data) => {
+    const options = {
+      key: "rzp_test_6KsemjonNAURfU",
+      amount: Number(data.amount),
+      currency: data.currency,
+      name: "FlipClone",
+      description: "One Place For Everything",
+      order_id: data.id,
+      handler: async function (response) {
+        // alert(response.razorpay_payment_id);
+        console.log(response, "34");
+        let res = await paymentVeriy(response);
+        if(!res){
+          console.log(res);
+        }
+        else{
+         console.log(res,"37");
+        }
+      }
+    };
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  }
+
+  const handlePayment = async(amount) => {
+      const _data = {amount}
+      let response = await paymentOrders(_data);
+      if(!response) return;
+      handleOpenRazorPay(response.data.data);
+  }
+
 
   return (
     <LeftContainer>
@@ -63,7 +95,7 @@ const ActionItem = ({product}) => {
       <Image src={product.detailUrl} alt='detail'/>
         </Box>
       <StyledButton variant='contained' onClick={()=>addItemToCart()} style={{marginRight:10,background:"#ff9f00"}}><Cart/>Add to Cart</StyledButton>
-      <StyledButton variant='contained' style={{background:"#fb541b"}}><Flash/>Buy Now</StyledButton>
+      <StyledButton variant='contained' onClick={()=>handlePayment(product.price.cost)} style={{background:"#fb541b"}}><Flash/>Buy Now</StyledButton>
       <ToastContainer/>
     </LeftContainer>
   )

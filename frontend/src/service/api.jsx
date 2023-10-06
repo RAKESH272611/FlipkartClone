@@ -35,6 +35,22 @@ export const authenticateToken = async(token) => {
   }
 }
 
+export const paymentOrders = async(data) => {
+  try{
+      return await axios.post(`${URL}/orders`,data);
+  }catch(error){
+     return error.response;
+  }
+}
+
+export const paymentVeriy = async(response) => {
+  try{
+    return await axios.post(`${URL}/verify`,response);
+  }catch(error){
+    return error.response;
+  }
+}
+
 
 
 
