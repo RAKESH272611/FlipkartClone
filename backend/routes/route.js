@@ -21,7 +21,7 @@ router.patch('/cart/remove/:id',authToken,removeOneItem)
 router.patch('/cart/remove',authToken,removeAllItem)
 
 router.post('/orders',paymentOrders)
-router.post('/veriy',paymentVerify)
+router.post('/verify',paymentVerify)
 
 
 

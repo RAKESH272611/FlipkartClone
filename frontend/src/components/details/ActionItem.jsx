@@ -69,7 +69,7 @@ const ActionItem = ({product}) => {
         // alert(response.razorpay_payment_id);
         console.log(response, "34");
         let res = await paymentVeriy(response);
-        if(!res){
+        if(res.status!==200){
           console.log(res);
         }
         else{
@@ -82,9 +82,10 @@ const ActionItem = ({product}) => {
   }
 
   const handlePayment = async(amount) => {
-      const _data = {amount}
+      const _data = {amount};
       let response = await paymentOrders(_data);
-      if(!response) return;
+      if(response.status!==200) return;
+      console.log(response);
       handleOpenRazorPay(response.data.data);
   }
 

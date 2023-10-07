@@ -39,12 +39,14 @@ export const paymentOrders = async(data) => {
   try{
       return await axios.post(`${URL}/orders`,data);
   }catch(error){
+    // console.log(error);
      return error.response;
   }
 }
 
 export const paymentVeriy = async(response) => {
   try{
+    // console.log(response);
     return await axios.post(`${URL}/verify`,response);
   }catch(error){
     return error.response;
